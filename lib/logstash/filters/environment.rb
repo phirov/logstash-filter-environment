@@ -50,7 +50,7 @@ class LogStash::Filters::Environment < LogStash::Filters::Base
   def filter(event)
     
     @add_metadata_from_env.each do |field, env|
-      event.set("[@metadata][#{field}]", ENV[env])
+      event.set("[@metadata][#{field}]", ENV[event.sprintf(env)])
     end
     filter_matched(event)
   end # def filter
